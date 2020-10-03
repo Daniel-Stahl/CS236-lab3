@@ -37,9 +37,35 @@ void BST::insert(double x) {
 }
 
 void BST::inorder(vector<double> & v, BTreeNode *t) {
+    if (t == NULL)
+        return;
     
-    
-    // Cout in order
+    inorder(v, t->left);
+    v.push_back(t->value);
+    inorder(v, t->right);
 }
 
+int BST::leafCounter(BTreeNode *t) {
+    if (t == NULL) {
+        return 0;
+    } else if (t->left == NULL && t->right == NULL) {
+        return 1;
+    } else {
+        return leafCounter(t->left) + leafCounter(t->right);
+    }
+}
 
+void BST::DestroyTree(BTreeNode* tNode) {
+    if (tNode == NULL) {
+        return;
+    }
+    
+    DestroyTree(tNode->left);
+    DestroyTree(tNode->right);
+    delete tNode;
+}
+
+BST::~BST() {
+    DestroyTree(tree);
+    tree = NULL;
+}

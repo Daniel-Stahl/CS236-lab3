@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
-#include <new>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -24,7 +25,9 @@ public:
     void insert(double x);
     void inorder(vector<double> & v) { inorder(v, tree); }
     int leafCounter() { return leafCounter(tree); }
+    void DestroyTree(BTreeNode* tNode);
     BST() { tree = NULL; }
+    ~BST();
     
 private:
     void inorder(vector<double>&tlist, BTreeNode *t);
